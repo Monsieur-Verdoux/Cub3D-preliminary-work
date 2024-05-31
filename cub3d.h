@@ -6,7 +6,7 @@
 /*   By: akovalev <akovalev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 17:11:45 by akovalev          #+#    #+#             */
-/*   Updated: 2024/05/29 20:53:48 by akovalev         ###   ########.fr       */
+/*   Updated: 2024/05/31 18:22:14 by akovalev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ typedef struct s_map
 	char		*c;
 	t_vec		map_copy;
 	int			line_count;
+	char		**ceiling;
+	char		**floor;
 }	t_map;
 
 #endif
