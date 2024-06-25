@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akovalev <akovalev@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: akovalev <akovalev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 17:08:41 by akovalev          #+#    #+#             */
-/*   Updated: 2024/05/31 19:22:51 by akovalev         ###   ########.fr       */
+/*   Updated: 2024/06/25 18:17:29 by akovalev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,6 @@ void	free_array(char **arr)
 
 void	free_map_info(t_map *map)
 {
-	int	i;
-
-	i = 0;
 	printf("About to free everything\n");
 	free(map->no);
 	free(map->ea);
@@ -154,6 +151,7 @@ int	check_lines(t_map *map)
 				}
 				if ((y < map->map_copy.len - 1 && (nxt_str [x] == ' ' || nxt_str [x] == '\n'|| nxt_str [x] == '\0')) || y == map->map_copy.len - 1)
 				{
+					printf("y is %ld and map len - 1 is %ld\n", y, (map->map_copy.len - 1));
 					printf("Wrong character below %s\n", &str[x]);
 					return (1);
 				}
@@ -163,7 +161,7 @@ int	check_lines(t_map *map)
 		//printf("\n");
 		y++;
 	}
-	if (access(map->no, O_RDONLY) || access(map->so, O_RDONLY) || access(map->we, O_RDONLY) || access(map->ea, O_RDONLY)) //access not allowed, so later check with the MLX mlx_load_png 
+	if (access(map->no, O_RDONLY) || access(map->so, O_RDONLY) || access(map->we, O_RDONLY) || access(map->ea, O_RDONLY)) //access not allowed, so later check with the MLX mlx_load_png
 	{
 		printf("Can't access texture file\n");
 		return (1);

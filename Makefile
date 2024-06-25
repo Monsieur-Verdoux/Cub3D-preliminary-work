@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: akovalev <akovalev@student.hive.fi>        +#+  +:+       +#+         #
+#    By: akovalev <akovalev@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/29 17:34:25 by akovalev          #+#    #+#              #
-#    Updated: 2024/05/29 17:37:58 by akovalev         ###   ########.fr        #
+#    Updated: 2024/06/25 17:50:20 by akovalev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	:= cub3d
-CFLAGS	:= -Wall -Wextra -Werror -Wunreachable-code -Ofast
+CFLAGS	:= -Wunreachable-code -Ofast #-Wall -Wextra -Werror 
 #LIBMLX	:= ./MLX42
 
 #HEADERS	:= -I $(LIBMLX)/include
