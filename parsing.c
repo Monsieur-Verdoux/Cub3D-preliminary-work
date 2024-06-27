@@ -6,7 +6,7 @@
 /*   By: akovalev <akovalev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 17:08:41 by akovalev          #+#    #+#             */
-/*   Updated: 2024/06/25 18:17:29 by akovalev         ###   ########.fr       */
+/*   Updated: 2024/06/27 18:14:00 by akovalev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,110 @@ int	check_arguments(int argc, char **argv, t_map *map)
 
 int	validate_colors(t_map *map)
 {
+	char	*c;
+	char	*f;
+	int		i;
+	int		j;
+
+	c = map->c;
+	f = map->f;
+
+	if (*c == ',')
+	{
+				ft_putstr_fd("Error:\nIncorrect ceiling color format\n", 2);
+				return (1);
+	}
+	if (*f == ',')
+	{
+				ft_putstr_fd("Error:\nIncorrect floor color format\n", 2);
+				return (1);
+	}
+	while (*c)
+	{
+		//printf("we are at %c\n", *c);
+		if (*c == ',')
+		{	
+			c++;
+			if (*c == ',' || *c == '\0')
+			{
+				ft_putstr_fd("Error:\nIncorrect ceiling color format\n", 2);
+				return (1);
+			}
+		}
+		else
+			c++;
+	}
+	while (*f)
+	{
+		//printf("we are at %c\n", *f);
+		if (*f == ',')
+		{	
+			f++;
+			if (*f == ',' || *f == '\0')
+			{
+				ft_putstr_fd("Error:\nIncorrect floor color format\n", 2);
+				return (1);
+			}
+		}
+		else
+			f++;
+	}
 	map->ceiling = ft_split(map->c, ',');
+	i = 0;
+	while (map->ceiling[i] != NULL)
+	{
+		if (ft_atoi(map->ceiling[i]) > 255)
+		{
+				ft_putstr_fd("Error:\nColor format > 255\n", 2);
+				return (1);
+		}
+		j = 0;
+		while (map->ceiling[i][j])
+		{
+			//ft_printf("we are at %c\n", map->ceiling[i][j]);
+			if (map->ceiling[i][j] >= '0' &&  map->ceiling[i][j] <= '9')
+				j++;
+			else
+			{
+				ft_putstr_fd("Error:\nNon-numeric characters in the color format\n", 2);
+				return (1);
+			}
+		}
+		i++;
+	}
+	if (i != 3)
+	{
+		ft_putstr_fd("Error:\nIncorrect ceiling color format: exactly three numbers required\n", 2);
+		return (1);
+	}
 	map->floor = ft_split(map->f, ',');
+	i = 0;
+	while (map->floor[i] != NULL)
+	{
+		if (ft_atoi(map->floor[i]) > 255)
+		{
+				ft_putstr_fd("Error:\nColor format > 255\n", 2);
+				return (1);
+		}
+		j = 0;
+		while (map->floor[i][j])
+		{
+			//ft_printf("we are at %c\n", map->floor[i][j]);
+			if (map->floor[i][j] >= '0' &&  map->floor[i][j] <= '9')
+				j++;
+			else
+			{
+				ft_putstr_fd("Error:\nNon-numeric characters in the color format\n", 2);
+				return (1);
+			}
+		}
+		i++;
+	}
+	if (i != 3)
+	{
+		ft_putstr_fd("Error:\nIncorrect floor color format: exactly three numbers required\n", 2);
+		return (1);
+	}
 	return (0);
 }
 
@@ -139,7 +241,7 @@ int	check_lines(t_map *map)
 					printf("Wrong character after %s\n", &str[x]);
 					return (1);
 				}
-				if ((y && (pr_str[x] == ' ' || pr_str[x] == '\n')) || y == 0)
+				if (x >= ft_strlen (pr_str) || (y && (pr_str[x] == ' ' || pr_str[x] == '\n')) || y == 0)
 				{
 					printf("Wrong character above %s\n", &str[x]);
 					return (1);
@@ -149,9 +251,9 @@ int	check_lines(t_map *map)
 					printf("Wrong character before %s\n", &str[x]);
 					return (1);
 				}
-				if ((y < map->map_copy.len - 1 && (nxt_str [x] == ' ' || nxt_str [x] == '\n'|| nxt_str [x] == '\0')) || y == map->map_copy.len - 1)
+				if (x >= ft_strlen (nxt_str) || (y < map->map_copy.len - 1 && (nxt_str [x] == ' ' || nxt_str [x] == '\n'|| nxt_str [x] == '\0')) || y == map->map_copy.len - 1)
 				{
-					printf("y is %ld and map len - 1 is %ld\n", y, (map->map_copy.len - 1));
+					//printf("y is %ld and map len - 1 is %ld\n", y, (map->map_copy.len - 1));
 					printf("Wrong character below %s\n", &str[x]);
 					return (1);
 				}
