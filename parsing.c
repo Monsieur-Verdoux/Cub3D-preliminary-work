@@ -6,7 +6,7 @@
 /*   By: akovalev <akovalev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 17:08:41 by akovalev          #+#    #+#             */
-/*   Updated: 2024/07/15 17:51:25 by akovalev         ###   ########.fr       */
+/*   Updated: 2024/07/15 18:50:57 by akovalev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -421,6 +421,11 @@ int	validate_map(t_map *map)
 		//ft_putstr_fd("line %d read successfully and is %s\n", n, line);	
 		n++;
 	}
+	if (count != 6)
+	{
+		ft_putstr_fd("Error\nIncorrect or missing map lines\n", 2);
+		return (1);
+	}
 	// if (!map->no || !map->so ||!map->we ||!map->ea || !map->f || !map->c)
 	// {
 	// 	ft_putstr_fd("Error\nMap file missing necessary data\n", 2);
@@ -434,11 +439,19 @@ int	validate_map(t_map *map)
 	printf("Ceiling color is %s\n", map->c);
 	line = get_next_line(map->fd);
 	if (!line)
+	{
+		ft_putstr_fd("Error\nIncorrect or missing map lines\n", 2);
 		return(1);
-	while (!ft_strncmp(line, "\n", 1))
+	}
+	while (line && !ft_strncmp(line, "\n", 1))
 	{
 		free(line);
 		line = get_next_line(map->fd);
+	}
+	if (!line)
+	{
+		ft_putstr_fd("Error\nIncorrect or missing map lines\n", 2);
+		return(1);
 	}
 	while (line)
 	{
