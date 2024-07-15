@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akovalev <akovalev@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: akovalev <akovalev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 17:11:45 by akovalev          #+#    #+#             */
-/*   Updated: 2024/05/31 18:22:14 by akovalev         ###   ########.fr       */
+/*   Updated: 2024/07/15 17:19:48 by akovalev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "Libft/get_next_line_bonus.h"
 # include "Libft/ft_printf.h"
 # include <fcntl.h>
+# include "MLX42/MLX42.h"
 
 typedef struct s_map
 {
@@ -33,6 +34,7 @@ typedef struct s_map
 	int			line_count;
 	char		**ceiling;
 	char		**floor;
+	int			start_pos;
 }	t_map;
 
 #endif
